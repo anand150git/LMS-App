@@ -9,19 +9,20 @@ import CourseProgressButton from "./_components/CourseProgressButton";
 import NextChapterButton from "./_components/NextChapterButton";
 import EnrollCourseForFree from "./_components/EnrollCourseForFree";
 
-
-const page = async ({
-  params
-}: {
-  params: { courseId: string, chapterId: string }
+interface PageProps {
+  params: {
+    courseId: string;
+    chapterId: string;
+  };
 }
-) => {
+
+const Page = async ({ params }: PageProps) => {
   const { userId } = await auth();
-  const { courseId, chapterId } = await params;
+  const { courseId, chapterId } = params;
 
   if (!userId) {
     return redirect("/");
-  };
+  }
 
   const {
     chapter,
@@ -33,7 +34,7 @@ const page = async ({
   } = await getChapter({
     userId,
     courseId,
-    chapterId
+    chapterId,
   });
 
   if (!chapter || !course) {
@@ -42,14 +43,10 @@ const page = async ({
 
   const isLocked = !chapter.isFree && !purchase;
 
-
   return (
     <div>
       {userProgress?.isCompleted && (
-        <Banner
-          variant="success"
-          label="You already completed this chapter!"
-        />
+        <Banner variant="success" label="You already completed this chapter!" />
       )}
       {isLocked && (
         <Banner
@@ -69,13 +66,9 @@ const page = async ({
         </div>
         <div>
           <div className="p-4 flex flex-col md:flex-row items-center justify-between">
-            <h2 className="text-2xl font-semibold mb-2">
-              {chapter.title}
-            </h2>
+            <h2 className="text-2xl font-semibold mb-2">{chapter.title}</h2>
 
-            <div
-              className="flex flex-col gap-2 w-full md:w-fit"
-            >
+            <div className="flex flex-col gap-2 w-full md:w-fit">
               {purchase && (
                 <CourseProgressButton
                   chapterId={chapterId}
@@ -92,14 +85,18 @@ const page = async ({
                 />
               )}
 
-              {!purchase && (course.price !== 0 && course.price !== null) && (
-                <CourseEnrollButton
-                  price={course.price!}
-                />
+              {!purchase && course.price !== 0 && course.price !== null && (
+                <CourseEnrollButton price={course.price!} />
               )}
 
               {!purchase && (course.price === 0 || course.price === null) && (
-                <div className={!purchase && (course.price === 0 || course.price === null) ? "block" : "hidden"}>
+                <div
+                  className={
+                    !purchase && (course.price === 0 || course.price === null)
+                      ? "block"
+                      : "hidden"
+                  }
+                >
                   <EnrollCourseForFree courseId={courseId} />
                 </div>
               )}
@@ -112,7 +109,7 @@ const page = async ({
             /> */}
             {chapter.description}
           </div>
-          {(!!purchase && !!attachments.length) && (
+          {!!purchase && !!attachments.length && (
             <>
               <Separator />
               <div className="p-4">
@@ -123,9 +120,7 @@ const page = async ({
                     key={attachment.id}
                     className="flex items-center p-3 w-full bg-sky-200 border text-sky-700 rounded-md hover:underline"
                   >
-                    <p className="line-clamp-1">
-                      {attachment.name}
-                    </p>
+                    <p className="line-clamp-1">{attachment.name}</p>
                   </a>
                 ))}
               </div>
@@ -134,7 +129,7 @@ const page = async ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default Page;

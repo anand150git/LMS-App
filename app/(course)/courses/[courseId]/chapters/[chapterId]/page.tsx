@@ -13,7 +13,7 @@ import EnrollCourseForFree from "./_components/EnrollCourseForFree";
 const page = async ({
   params
 }: {
-  params: { courseId: string, chapterId: string; }
+  params: { courseId: string, chapterId: string }
 }
 ) => {
   const { userId } = await auth();

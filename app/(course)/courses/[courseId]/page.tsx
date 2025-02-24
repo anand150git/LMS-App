@@ -4,7 +4,7 @@ import React from 'react'
 
 const page = async ({
   params
-}: { params: { courseId: string; } }
+}: { params: { courseId: string } }
 ) => {
   const course = await db.course.findUnique({
     where: {

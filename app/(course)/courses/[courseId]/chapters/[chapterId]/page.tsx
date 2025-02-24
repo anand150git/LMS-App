@@ -14,9 +14,11 @@ interface PageProps {
     courseId: string;
     chapterId: string;
   };
+  // add searchParams to satisfy Next.js types
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
-const Page = async ({ params }: PageProps) => {
+const Page = async ({ params, searchParams }: PageProps) => {
   const { userId } = await auth();
   const { courseId, chapterId } = params;
 
@@ -67,7 +69,6 @@ const Page = async ({ params }: PageProps) => {
         <div>
           <div className="p-4 flex flex-col md:flex-row items-center justify-between">
             <h2 className="text-2xl font-semibold mb-2">{chapter.title}</h2>
-
             <div className="flex flex-col gap-2 w-full md:w-fit">
               {purchase && (
                 <CourseProgressButton
@@ -77,36 +78,32 @@ const Page = async ({ params }: PageProps) => {
                   isCompleted={!!userProgress?.isCompleted}
                 />
               )}
-
               {nextChapter && purchase && (
                 <NextChapterButton
                   courseId={courseId}
                   nextChapterId={nextChapter?.id!}
                 />
               )}
-
               {!purchase && course.price !== 0 && course.price !== null && (
                 <CourseEnrollButton price={course.price!} />
               )}
-
-              {!purchase && (course.price === 0 || course.price === null) && (
-                <div
-                  className={
-                    !purchase && (course.price === 0 || course.price === null)
-                      ? "block"
-                      : "hidden"
-                  }
-                >
-                  <EnrollCourseForFree courseId={courseId} />
-                </div>
-              )}
+              {!purchase &&
+                (course.price === 0 || course.price === null) && (
+                  <div
+                    className={
+                      !purchase &&
+                      (course.price === 0 || course.price === null)
+                        ? "block"
+                        : "hidden"
+                    }
+                  >
+                    <EnrollCourseForFree courseId={courseId} />
+                  </div>
+                )}
             </div>
           </div>
           <Separator />
           <div className="p-4 text-justify font-medium">
-            {/* <Preview 
-              value={chapter.description!}
-            /> */}
             {chapter.description}
           </div>
           {!!purchase && !!attachments.length && (

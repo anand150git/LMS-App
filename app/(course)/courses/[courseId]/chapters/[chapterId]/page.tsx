@@ -18,9 +18,12 @@ interface PageProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
-const Page = async ({ params, searchParams }: PageProps) => {
-  const { userId } = await auth();
+const Page = async ({ params: _params, searchParams }: PageProps) => {
+  // Normalize params in case they are a thenable
+  const params = await Promise.resolve(_params);
   const { courseId, chapterId } = params;
+
+  const { userId } = await auth();
 
   if (!userId) {
     return redirect("/");

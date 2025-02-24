@@ -26,7 +26,6 @@ const page = async ({
   const {
     chapter,
     course,
-    muxData,
     attachments,
     nextChapter,
     userProgress,
@@ -65,12 +64,9 @@ const page = async ({
           <VideoPlayer
             chapterId={chapterId}
             chapter={chapter}
-            title={chapter.title}
             courseId={courseId}
             nextChapterId={nextChapter?.id}
-            playbackId={muxData?.playbackId!}
             isLocked={isLocked}
-            completeOnEnd={completeOnEnd}
           />
         </div>
         <div>
@@ -100,7 +96,6 @@ const page = async ({
 
               {!purchase && (course.price !== 0 && course.price !== null) && (
                 <CourseEnrollButton
-                  courseId={courseId}
                   price={course.price!}
                 />
               )}

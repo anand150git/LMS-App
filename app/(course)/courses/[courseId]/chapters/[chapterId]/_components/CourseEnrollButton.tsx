@@ -5,12 +5,10 @@ import { formatPrice } from "@/lib/format";
 
 interface CourseEnrollButtonProps {
   price: number;
-  courseId: string;
 }
 
 const CourseEnrollButton = ({
   price,
-  courseId
 }: CourseEnrollButtonProps) => {
   
   return (

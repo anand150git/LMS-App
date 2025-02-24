@@ -6,29 +6,22 @@ import { Chapter } from "@prisma/client";
 import axios from "axios";
 import { Lock } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import toast from "react-hot-toast";
 
 interface VideoPlayerProps {
-  playbackId: string;
   courseId: string;
   chapterId: string;
   nextChapterId?: string;
   chapter: Chapter;
   isLocked: boolean;
-  completeOnEnd: boolean;
-  title: string;
 }
 
 const VideoPlayer = ({
-  playbackId,
   courseId,
   chapterId,
   nextChapterId,
   isLocked,
   chapter,
-  completeOnEnd,
-  title,
 }: VideoPlayerProps) => {
   const router = useRouter();
   const confetti = useConfettiStore();

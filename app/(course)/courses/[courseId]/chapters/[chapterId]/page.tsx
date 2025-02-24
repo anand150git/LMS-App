@@ -13,7 +13,7 @@ import EnrollCourseForFree from "./_components/EnrollCourseForFree";
 const page = async ({
   params
 }: {
-  params: { courseId: string; chapterId: string; }
+  params: { courseId: string, chapterId: string; }
 }
 ) => {
   const { userId } = await auth();
@@ -41,8 +41,6 @@ const page = async ({
   }
 
   const isLocked = !chapter.isFree && !purchase;
-
-  const completeOnEnd = !!purchase && !userProgress?.isCompleted;
 
 
   return (

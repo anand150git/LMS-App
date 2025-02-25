@@ -13,15 +13,11 @@ interface PageProps {
   params: {
     courseId: string;
     chapterId: string;
-  };
-  // add searchParams to satisfy Next.js types
-  searchParams: { [key: string]: string | string[] | undefined };
+  }
 }
 
-const Page = async ({ params: _params, searchParams }: PageProps) => {
-  // Normalize params in case they are a thenable
-  const params = await Promise.resolve(_params);
-  const { courseId, chapterId } = params;
+const Page = async ({ params }: PageProps) => {
+  const { courseId, chapterId } = await params;
 
   const { userId } = await auth();
 

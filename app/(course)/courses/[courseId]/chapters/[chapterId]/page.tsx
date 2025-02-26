@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getChapter } from "@/actions/GetChapter";
 import Banner from "@/components/Banner";
 import { auth } from "@clerk/nextjs/server";

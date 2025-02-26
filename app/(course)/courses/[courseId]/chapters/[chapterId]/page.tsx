@@ -1,3 +1,4 @@
+/* tslint:disable */
 // @ts-nocheck
 import { getChapter } from "@/actions/GetChapter";
 import Banner from "@/components/Banner";

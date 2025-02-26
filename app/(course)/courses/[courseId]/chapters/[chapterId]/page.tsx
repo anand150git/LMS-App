@@ -9,14 +9,15 @@ import CourseProgressButton from "./_components/CourseProgressButton";
 import NextChapterButton from "./_components/NextChapterButton";
 import EnrollCourseForFree from "./_components/EnrollCourseForFree";
 
-interface ChapterIdPageProps {
+
+const Page = async ({ 
+  params 
+}: {
   params: {
     courseId: string;
     chapterId: string;
-  };
-}
-
-const Page: React.FC<ChapterIdPageProps> = async ({ params }) => {
+  }
+}) => {
   const { courseId, chapterId } = await params;
 
   const { userId } = await auth();

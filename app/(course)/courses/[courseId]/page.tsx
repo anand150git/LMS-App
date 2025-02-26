@@ -1,14 +1,15 @@
 import { db } from '@/lib/db';
 import { redirect } from 'next/navigation';
-import React from 'react'
 
 const page = async ({
   params
 }: { params: { courseId: string } }
 ) => {
+  const { courseId } = await params;
+
   const course = await db.course.findUnique({
     where: {
-      id: params.courseId,
+      id: courseId,
     },
     include: {
       chapters: {

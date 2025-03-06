@@ -4,10 +4,10 @@ import React from 'react'
 const Logo = () => {
   return (
     <Image
-        src='/logo.svg'
+        src='/full-logo.png'
         alt='Logo'
-        width={100}
-        height={100}
+        width={200}
+        height={200}
     />
   )
 }

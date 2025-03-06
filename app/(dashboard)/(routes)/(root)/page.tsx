@@ -1,6 +1,5 @@
-import React from 'react'
-import { UserButton } from '@clerk/nextjs'
-import { auth } from '@clerk/nextjs/server'
+import React from 'react';
+import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import { getDashboardCourses } from '@/actions/GetDashboardCourses';
 import CoursesList from '@/components/CoursesList';
@@ -16,7 +15,7 @@ const page = async () => {
 
   const {
     completedCourses,
-    coursesInProgress
+    coursesInProgress,
   } = await getDashboardCourses(userId);
 
   return (

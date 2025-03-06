@@ -25,6 +25,7 @@ const CoursesList = ({
             title={item.title}
             imageUrl={item.imageUrl!}
             chaptersLength={item.chapters.length}
+            firstChapterId={item.chapters[0].id}
             price={item.price!}
             progress={item.progress!}
             category={item.category?.name || "No category"}

@@ -12,6 +12,7 @@ interface CourseCardProps {
   title: string;
   imageUrl: string;
   chaptersLength: number;
+  firstChapterId:  string;
   purchase: boolean;
   price: number;
   progress: number;
@@ -23,13 +24,14 @@ const CourseCard = ({
   title,
   imageUrl,
   chaptersLength,
+  firstChapterId,
   price,
   progress,
   category,
   purchase,
 }: CourseCardProps) => {
   return (
-    <Link href={`/courses/${id}`}>
+    <Link href={`/courses/${id}/chapters/${firstChapterId}`}>
       <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full">
         <div className="relative w-full aspect-video rounded-md overflow-hidden">
           <Image 

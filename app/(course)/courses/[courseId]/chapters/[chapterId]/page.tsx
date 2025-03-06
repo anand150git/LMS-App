@@ -20,7 +20,7 @@ const Page = async ({
     chapterId: string;
   }
 }) => {
-  const { courseId, chapterId } = await params;
+  // const { courseId, chapterId } = await params;
 
   const { userId } = await auth();
 
@@ -37,8 +37,8 @@ const Page = async ({
     purchase,
   } = await getChapter({
     userId,
-    courseId,
-    chapterId,
+    courseId: params.courseId,
+    chapterId: params.chapterId,
   });
 
   if (!chapter || !course) {
@@ -61,9 +61,9 @@ const Page = async ({
       <div className="flex flex-col max-w-4xl mx-auto pb-20">
         <div className="p-4">
           <VideoPlayer
-            chapterId={chapterId}
+            chapterId={params.chapterId}
             chapter={chapter}
-            courseId={courseId}
+            courseId={params.courseId}
             nextChapterId={nextChapter?.id}
             isLocked={isLocked}
           />
@@ -74,15 +74,15 @@ const Page = async ({
             <div className="flex flex-col gap-2 w-full md:w-fit">
               {purchase && (
                 <CourseProgressButton
-                  chapterId={chapterId}
-                  courseId={courseId}
+                  chapterId={params.chapterId}
+                  courseId={params.courseId}
                   nextChapterId={nextChapter?.id}
                   isCompleted={!!userProgress?.isCompleted}
                 />
               )}
               {nextChapter && purchase && (
                 <NextChapterButton
-                  courseId={courseId}
+                  courseId={params.courseId}
                   nextChapterId={nextChapter?.id!}
                 />
               )}
@@ -99,7 +99,7 @@ const Page = async ({
                         : "hidden"
                     }
                   >
-                    <EnrollCourseForFree courseId={courseId} />
+                    <EnrollCourseForFree courseId={params.courseId} />
                   </div>
                 )}
             </div>
